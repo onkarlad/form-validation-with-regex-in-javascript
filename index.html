@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM VALIDATION</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h1>FORM VALIDATION USING REGEX IN JAVASCRIPT</h1>
+    <form onsubmit="return validation();" action="login.html">
+        <div class="container">
+            <label for="usernmae">username</label>
+            <input type="text" name="usernmae" id="usernmae">
+            <p id="usererror"></p><br>
+            <label for="password">password</label>
+            <input type="password" name="password" id="password">
+            <p id="passerror">sequence should be letters/numbers/special character/numbers</p><br>
+            <label for="confirmpass">confirm password</label>
+            <input type="password" name="confirmpass" id="confirmpass">
+            <p id="cperror"></p><br>
+            <label for="email">email</label>
+            <input type="email" name="email" id="email">
+            <p id="emailerror"></p><br>
+            <label for="number">number</label>
+            <input type="number" name="number" id="number">
+            <p id="numbererror"></p>
+            <input type="submit" value="Submit" class="btn">
+        </div>
+    </form>
+
+    <script>
+        function validation() {
+            var getusername = document.getElementById("usernmae").value;
+            var getpassword = document.getElementById("password").value;
+            var getconfirmpass = document.getElementById("confirmpass").value;
+            var getemail = document.getElementById("email").value;
+            var getnumber = document.getElementById("number").value;
+
+            var usernamecheck = /^[A-Za-z. ]{3,50}$/;
+            var passwordcheck = /^[A-Za-z_]{1,}[0-9]{1,}[!@#$%^&*]{1}[0-9]{1,}$/gmi
+            var emailcheck = /^[A-Za-z_]{3,}?[0-9]{1,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/;
+            var numbercheck = /^[789]{1}[0-9]{9}$/
+
+
+            // for username
+            if (usernamecheck.test(getusername)) {
+                document.getElementById("usererror").innerHTML = " ";
+                document.getElementById("usernmae").style.cssText = "border: 2px solid green";
+            } else {
+                document.getElementById("usererror").innerHTML = "*username is invalid";
+                document.getElementById("usererror").style.cssText = "color:red;";
+                document.getElementById("usernmae").style.cssText = "border: 2px solid red";
+                return false;
+            }
+
+
+            // for password
+            if (passwordcheck.test(getpassword)) {
+                document.getElementById("passerror").innerHTML = "";
+                document.getElementById("password").style.cssText = "border: 2px solid green";
+            } else {
+                document.getElementById("passerror").innerHTML = "*password is invalid";
+                document.getElementById("passerror").style.cssText = "color:red;";
+                document.getElementById("password").style.cssText = "border: 2px solid red";
+
+                return false;
+            }
+
+            // for confirmpassword
+            if (getconfirmpass.match(getpassword)) {
+                document.getElementById("cperror").innerHTML = " ";
+                document.getElementById("confirmpass").style.cssText = "border: 2px solid green";
+            } else {
+                document.getElementById("cperror").innerHTML = " *password no matched ";
+                document.getElementById("cperror").style.cssText = "color:red;";
+                document.getElementById("confirmpass").style.cssText = "border: 2px solid red";
+
+                return false;
+            }
+
+            // for email
+            if (emailcheck.test(getemail)) {
+                document.getElementById("emailerror").innerHTML = " ";
+                document.getElementById("email").style.cssText = "border: 2px solid green";
+            } else {
+                document.getElementById("emailerror").innerHTML = "*email is invalid";
+                document.getElementById("emailerror").style.cssText = "color:red;";
+                document.getElementById("email").style.cssText = "border: 2px solid red";
+                return false;
+
+            }
+
+
+            // for mobile numeber
+            if (numbercheck.test(getnumber)) {
+                document.getElementById("numbererror").innerHTML = " ";
+                document.getElementById("number").style.cssText = "border: 2px solid green";
+            } else {
+                document.getElementById("numbererror").innerHTML = "*mobile number is invalid";
+                document.getElementById("numbererror").style.cssText = "color:red;";
+                document.getElementById("number").style.cssText = "border: 2px solid red";
+                return false;
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>
